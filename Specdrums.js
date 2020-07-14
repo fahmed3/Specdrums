@@ -1,32 +1,42 @@
-class Specdrum {
-    constructor(){
-	Specdrum.eventTypes = ['*', 'connect', 'tap', 'release'];
+class Specdrum {    
+    constructor(device, characteristics){
 
-	this.service1 = '00010001-574f-4f20-5370-6865726f2121'; //write
-	this.service2 = '03b80e5a-ede8-4b33-a751-6ce34ec4c700'; //notify
+	Specdrum.specdrums = {};
 
 	this.events = [] //event listeners
+
+	this.device = device;
+	this.characteristics = characteristics;
+	
     }
 
-    connect(){
+    static connect(){
 	let self = this;
-	navigator.bluetooth.requestDevice({
+
+	//variables for adding a new specdrum later, may not need device ID
+	let newDevice;
+	let newDeviceID;
+	return navigator.bluetooth.requestDevice({
 	    filters: [{
 		namePrefix: 'SD-'
 	    }],
-	    optionalServices: [self.service1, self.service2]
+	    optionalServices: [Specdrum.service1, Specdrum.service2]
 	})
 	    .then(device => {
 		// Human-readable name of the device.
 		console.log("Name: ", device.name);
 		console.log("Device info: ", device);
-		// Attempts to connect to remote GATT Server.
+
+		newDevice = device;
+		newDeviceID = device.id;
+
+		// Attempts to connect to remote GATT Server.		
 		return device.gatt.connect();
 	    })
 	    .then(server => {
 		// Getting Primary Service...
 		console.log("Getting primary service...");
-		return server.getPrimaryService(self.service2);
+		return server.getPrimaryService(Specdrum.service2);
 	    })
 	    .then(service => {
 		//console.log("Service: ", service);
@@ -35,18 +45,11 @@ class Specdrum {
 	    .then(characteristics => {
 		// Reading characteristics... 
 		console.log("Getting characteristics... ");
-		characteristics[0].startNotifications();
-
-		//have to explicitly bind it, taken from Tinkamo code 
-		let bound_change = (function(event) {
-		    self.change(event)
-		}).bind(self);
-		characteristics[0].addEventListener('characteristicvaluechanged', bound_change);
-		this._callEventListeners({type: 'connect'});
-		//return characteristics[0].readValue();
+		
+		return self.connectASpecdrum(newDevice, characteristics);		
 	    })
 	    .catch(error => { console.log(error); });
-	
+	//console.log("new device: ", Specdrum.specdrums[newDeviceID]);
     }
 
     change(e){	
@@ -64,6 +67,7 @@ class Specdrum {
      * eventType must be one of the following:
      * - '*' - connect or disconnect
      * - 'connect'
+     * - 'disconnected'
      * - 'tap'
      * - 'release'
      *
@@ -113,9 +117,45 @@ class Specdrum {
             if (evObj.eventType == '*' || evObj.eventType == event.type)
                 evObj.func(event, ...evObj.args);
         }
-    }    
+    }
+
+
+    static connectASpecdrum(device, characteristics){
+	let newSpec = new Specdrum(device, characteristics);
+	
+	newSpec.characteristics[0].startNotifications();
+
+
+	let bound_change = (function(event) {
+            newSpec.change(event)
+        }).bind(newSpec);	
+	newSpec.characteristics[0].addEventListener('characteristicvaluechanged', bound_change);
+
+	let bound_disconnected = (function(event) {
+            newSpec.disconnected(event)
+        }).bind(newSpec);	
+	newSpec.device.addEventListener('gattserverdisconnected', bound_disconnected);
+
+	newSpec._callEventListeners({type: 'connect'});	
+	Specdrum.specdrums[device.id] = newSpec;
+
+	return Specdrum.specdrums[device.id];
+    }
+
+    disconnected(){
+	console.log(this.device.name + " has been disconnected.");
+	this._callEventListeners({type: 'disconnected', info: arr});
+    }
     
 };
+
+//static variables of the class
+Specdrum.eventTypes = ['*', 'connect', 'disconnected', 'tap', 'release'];
+Specdrum.service1 = '00010001-574f-4f20-5370-6865726f2121'; //write
+Specdrum.service2 = '03b80e5a-ede8-4b33-a751-6ce34ec4c700'; //notify
+
+//dict of specdrums
+
 
 
 export default Specdrum;
