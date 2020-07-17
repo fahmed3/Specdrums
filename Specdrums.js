@@ -53,10 +53,23 @@ class Specdrum {
     }
 
     change(e){	
-	let arr = new Uint8Array(event.target.value.buffer);
-	//console.log(arr);
-	if(arr[4] == 0) this._callEventListeners({type: 'release', info: arr});
-	else this._callEventListeners({type: 'tap', info: arr});
+        let chord;
+        let pitch;
+        let arr = new Uint8Array(event.target.value.buffer);
+        //console.log(arr);
+        if (arr.length == 5){
+            chord = false;
+            pitch = arr[3];
+        }
+        else if (arr.length == 9){
+            chord = true;
+            let pitch1 = arr[3]
+            let pitch2 = arr[5]
+            let pitch3 = arr[7]
+            pitch = [pitch1, pitch2, pitch3];
+        }
+        if(arr[4] == 0) this._callEventListeners({type: 'release', note: pitch, isChord: chord});
+        else this._callEventListeners({type: 'tap', note: pitch, isChord: chord});
     }
 
     /**

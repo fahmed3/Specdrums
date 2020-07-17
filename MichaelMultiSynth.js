@@ -1,7 +1,7 @@
 class MichaelMultiSynth {
 
     /* takes an args object as an argument, which includes key string and synth string */
-    constructor(args){
+    constructor(args = {key: "C", synth: "default"}){
         /* initialize Tone.Synth types */
         this.synth1Def = new Tone.Synth().toMaster();
         this.synth1FM = new Tone.FMSynth().toMaster();
@@ -89,6 +89,8 @@ class MichaelMultiSynth {
         else this.synths[this.synth]["poly"].releaseAll();
     }
 }
+
+export default MichaelMultiSynth;
 
 // mySynth = new MichaelMultiSynth({key: 'A', synth: 'default'});
 // console.log(mySynth.key);
