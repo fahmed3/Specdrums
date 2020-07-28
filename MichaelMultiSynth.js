@@ -3,27 +3,28 @@ class MichaelMultiSynth {
     /* takes an args object as an argument, which includes key string and synth string */
     constructor(args = {key: "C", synth: "default"}){
         /* initialize Tone.Synth types */
-        this.synth1Def = new Tone.Synth().toMaster();
-        this.synth1FM = new Tone.FMSynth().toMaster();
-        this.synth1AM = new Tone.AMSynth().toMaster();
-        this.synth2Def = new Tone.PolySynth(3, Tone.Synth).toMaster();
-        this.synth2FM = new Tone.PolySynth(3, Tone.FMSynth).toMaster();
-        this.synth2AM = new Tone.PolySynth(3, Tone.AMSynth).toMaster();
+	//Deprecated
+        this.synth1Def = new Tone.Synth().toDestination();
+        this.synth1FM = new Tone.FMSynth().toDestination();
+        this.synth1AM = new Tone.AMSynth().toDestination();
+        //this.synth2Def = new Tone.PolySynth(3, Tone.Synth).toDestination();
+       // this.synth2FM = new Tone.PolySynth(3, Tone.FMSynth).toDestination();
+     //   this.synth2AM = new Tone.PolySynth(3, Tone.AMSynth).toDestination();
         /* create synths object */
         this.synths = {
         /* each synths object contains an object for each synth type */
         /* and each subobject contains a Tone.synth (mono) and a Tone.PolySynth (poly) */
             default: {
-                mono: new Tone.Synth().toMaster(),
-                poly: new Tone.PolySynth(3, Tone.Synth).toMaster()
+                mono: new Tone.Synth().toDestination(),
+                poly: new Tone.PolySynth(Tone.Synth, {maxPolyphony:3}).toDestination()
             },
             am: {
-                mono: new Tone.AMSynth().toMaster(),
-                poly: new Tone.PolySynth(3, Tone.AMSynth).toMaster()
+                mono: new Tone.AMSynth().toDestination(),
+                poly: new Tone.PolySynth(Tone.AMSynth).toDestination()
             },
             fm: {
-                mono: new Tone.FMSynth().toMaster(),
-                poly: new Tone.PolySynth(3, Tone.FMSynth).toMaster()
+                mono: new Tone.FMSynth().toDestination(),
+                poly: new Tone.PolySynth(Tone.FMSynth).toDestination()
             }
         }
         /* if user passes a key and a synth, set our this objects to the parameters. */

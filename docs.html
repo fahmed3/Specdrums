@@ -1,0 +1,107 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Specdrums Docs</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <style>
+    .code {
+	font-family:Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New;
+    }
+    hr {
+	padding-bottom: 1em;
+    }
+  </style>
+  
+</head>
+<body>
+  <div style="padding:1em 5em">
+    <h1> Specdrum </h1>
+    <p> Class to handle connecting Specdrums to a Chrome browser and utilizing them.</p> <br>
+
+
+    <hr>
+    <p class="code">
+      Specdrum(device, characteristics) </p>
+    <h5> Description </h5>
+    <p>
+      Specdrum class constructor to create a new Specdrum instance by passing in the device information and its characteristics.
+    </p>
+    <h5>Parameters</h5>
+    <ul>
+      <li> device {object} - information on the device from the device</li>
+      <li> characteristics {object} - array of length 5 or 8, representing note or chord</li>
+    </ul> 
+
+
+
+    <hr>
+    <p class="code">
+      connect()
+    </p>
+
+    <h5> Description </h5>
+          A static method to connect a Specdrum to the browser using the <a href="https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web">Chrome Bluetooth API </a>. <br>
+    It returns a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a> for the developer to be able to continue to use in their code. </p>
+
+    <p> The following example uses the connect() method and instantiates a new Specdrum. 
+    </p>
+    <pre style="background-color:#E8E8E8" >
+      <code>
+	Specdrum.connect().then(spec => {
+	    console.log("Connected New Specdrum: ", spec.device.name);
+ 	    let spec = new Specdrum(spec.device, spec.characteristics);
+	}).catch(error => { console.log(error); });
+      </code>
+    </pre>
+
+    <hr>
+    <p class="code">
+      change()
+    </p>
+    <h5> Description </h5>
+    <p>
+      Function dealing with information received from the specdrum. It parses 
+      the array to see if it was a note or a chord, and to see if the specdrum 
+      was tapped or released, and then passes the information to event listeners.
+    </p>
+
+
+    <hr>
+    <p class="code">
+      addEventListener(eventType, func, ...args)
+    </p>
+    <h5> Description </h5>
+    <p>
+      Function to allow the user to create event listeners for certain events, for the specdrum events include: 'connect', 'disconnected', 'tap', and 'release'.
+    </p>
+    <h5>Parameters</h5>
+    <ul>
+      <li> eventType {string} - One of the accepted events </li>
+      <li> func {function} - Function to be called </li>
+      <li> args {} </li>
+    </ul> 
+
+
+    <hr>
+    <p class="code">
+      removeEventListener(eventType, func)
+    </p>
+    <h5> Description </h5>
+    <p>
+      Function to allow the user to remove event listeners they added.
+    </p>
+    <h5>Parameters</h5>
+    <ul>
+      <li> eventType {string} - The event the listener is being removed from </li>
+      <li> func {function} - Function to stop callback to </li>
+      <li> args {} </li>
+    </ul>     
+    
+  </div>
+</body>
+</html>

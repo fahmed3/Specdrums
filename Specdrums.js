@@ -45,13 +45,21 @@ class Specdrum {
 	    .then(characteristics => {
 		// Reading characteristics... 
 		console.log("Getting characteristics... ");
-		
 		return self.connectASpecdrum(newDevice, characteristics);		
 	    })
 	    .catch(error => { console.log(error); });
 	//console.log("new device: ", Specdrum.specdrums[newDeviceID]);
     }
 
+
+
+    /**
+     * Function dealing with information received from the specdrum. It parses 
+     * the array to see if it was a note or a chord, and to see if the specdrum 
+     * was tapped or released, information it passes to event listeners.
+     *
+     * @param {event} e
+     */    
     change(e){	
         let chord;
         let pitch;
@@ -131,8 +139,14 @@ class Specdrum {
                 evObj.func(event, ...evObj.args);
         }
     }
-
-
+    
+    /**
+     * Function to create a new specdrum and add it to the specdrums dictionary
+     *
+     * @param {object} device
+     * @param {object} characteristics
+     * @returns {string}
+     */    
     static connectASpecdrum(device, characteristics){
 	let newSpec = new Specdrum(device, characteristics);
 	
