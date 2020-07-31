@@ -35,11 +35,62 @@ function failure() {
 }
 
 function createGUI(spec, multisynth){
-    //create new synth gui
-    let synths = document.getElementById("synths");
-    let p = document.createElement("p");
-    p.innerHTML = spec.device.name;
-    synths.append(p);
-    //create gui elements
-    //make sure sliders affect parameters of multisynth - volume    
+    /* When Specdrum connects, show GUI */
+    let synth1 = document.getElementById("synth1");
+    if (synth1.style.display == "none"){
+        synth1.style.display = "block";
+        let s = document.getElementById("settings1");
+        s.innerHTML = spec.device.name + ": Settings";
+        let keyDD = document.getElementById('dropdownKey1');
+        let keySelect = document.getElementsByClassName('dropdown-item-key1');
+        let synthDD = document.getElementById('dropdownSynth1');
+        let synthSelect = document.getElementsByClassName('dropdown-item-synth1');
+        for (let i = 0; i < keySelect.length; i++){
+            keySelect[i].addEventListener("click", ()=>{
+                alterKey(keySelect[i].text, multisynth);
+                keyDD.innerHTML = "Key: " + keySelect[i].text;
+            })
+        }
+        for (let i = 0; i < synthSelect.length; i++){
+            synthSelect[i].addEventListener("click", ()=>{
+                alterSynth(synthSelect[i].classList[2], multisynth);
+                synthDD.innerHTML = "Synth: " + synthSelect[i].text;
+            })
+        }
+    }
+    else{
+        synth2.style.display = "block";
+        let s = document.getElementById("settings2");
+        s.innerHTML = spec.device.name + ": Settings";
+        let keyDD = document.getElementById('dropdownKey2');
+        let keySelect = document.getElementsByClassName('dropdown-item-key2');
+        let synthDD = document.getElementById('dropdownSynth2');
+        let synthSelect = document.getElementsByClassName('dropdown-item-synth2');
+        for (let i = 0; i < keySelect.length; i++){
+            keySelect[i].addEventListener("click", ()=>{
+                alterKey(keySelect[i].text, multisynth);
+                keyDD.innerHTML = "Key: " + keySelect[i].text;
+            })
+        }
+        for (let i = 0; i < synthSelect.length; i++){
+            synthSelect[i].addEventListener("click", ()=>{
+                alterSynth(synthSelect[i].classList[2], multisynth);
+                synthDD.innerHTML = "Synth: " + synthSelect[i].text;
+            })
+        }
+    }
+
+    /* Key-Controlling Dropdown Menu */
+    
+
+    /* Synth-Controlling Dropdown Menu */
+    
+}
+
+function alterKey(newKey, multisynth){
+    multisynth.setKey(newKey);
+}
+
+function alterSynth(newSynth, multisynth){
+    multisynth.setSynth(newSynth);
 }

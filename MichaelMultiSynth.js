@@ -2,18 +2,9 @@ class MichaelMultiSynth {
 
     /* takes an args object as an argument, which includes key string and synth string */
     constructor(args = {key: "C", synth: "default"}){
-        /* initialize Tone.Synth types */
-	//Deprecated
-        this.synth1Def = new Tone.Synth().toDestination();
-        this.synth1FM = new Tone.FMSynth().toDestination();
-        this.synth1AM = new Tone.AMSynth().toDestination();
-        //this.synth2Def = new Tone.PolySynth(3, Tone.Synth).toDestination();
-       // this.synth2FM = new Tone.PolySynth(3, Tone.FMSynth).toDestination();
-     //   this.synth2AM = new Tone.PolySynth(3, Tone.AMSynth).toDestination();
-        /* create synths object */
-        this.synths = {
         /* each synths object contains an object for each synth type */
-        /* and each subobject contains a Tone.synth (mono) and a Tone.PolySynth (poly) */
+        this.synths = {
+        /* and each subobject contains a Tone.Synth (mono) and a Tone.PolySynth (poly) */
             default: {
                 mono: new Tone.Synth().toDestination(),
                 poly: new Tone.PolySynth(Tone.Synth, {maxPolyphony:3}).toDestination()
@@ -33,6 +24,7 @@ class MichaelMultiSynth {
         this.synth = args.synth || "default";
         this.transpose;
         this.setKey(this.key);
+        this.setSynth(this.synth);
     }
 
     setKey(keySet){
@@ -66,7 +58,9 @@ class MichaelMultiSynth {
         }
     }
 
-    setSynth(synthSet){this.synth = synthSet;}
+    setSynth(synthSet){
+        this.synth = synthSet;
+    }
 
     attack(note, isChord){
         if (!isChord){
@@ -92,19 +86,3 @@ class MichaelMultiSynth {
 }
 
 export default MichaelMultiSynth;
-
-// mySynth = new MichaelMultiSynth({key: 'A', synth: 'default'});
-// console.log(mySynth.key);
-// console.log(mySynth.synth);
-// mySynth.setKey('D');
-// console.log(mySynth.key);
-// mySynth.setSynth('fm');
-// console.log(mySynth.synth);
-// console.log(typeof(mySynth));
-// // setTimeout(() => mySynth.attack(600, false), 1000);
-// // setTimeout(() => mySynth.release(false), 2000);
-
-// function testAttack(){
-//     mySynth.attack([60, 63, 67], true);
-//     setTimeout(() => mySynth.release(true), 2000);
-// }
