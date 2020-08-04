@@ -36,54 +36,60 @@ function failure() {
 
 function createGUI(spec, multisynth){
     /* When Specdrum connects, show GUI */
-    let synth1 = document.getElementById("synth1");
-    if (synth1.style.display == "none"){
-        synth1.style.display = "block";
-        let s = document.getElementById("settings1");
+    let wrap = document.getElementById("wrap");
+    let synth = document.getElementById("synth");
+    // If connecting first Specdrum, show synth node
+    if (synth.style.display == "none"){
+        let s = document.getElementsByClassName("settings")[0];
         s.innerHTML = spec.device.name + ": Settings";
-        let keyDD = document.getElementById('dropdownKey1');
-        let keySelect = document.getElementsByClassName('dropdown-item-key1');
-        let synthDD = document.getElementById('dropdownSynth1');
-        let synthSelect = document.getElementsByClassName('dropdown-item-synth1');
+        console.log(s.innerHTML);
+        let keyDD = document.getElementsByClassName('ddKey')[0];
+        let keySelect = document.getElementsByClassName('dropdown-item-key');
+        let synthDD = document.getElementsByClassName('ddSynth')[0];
+        let synthSelect = document.getElementsByClassName('dropdown-item-synth');
         for (let i = 0; i < keySelect.length; i++){
             keySelect[i].addEventListener("click", ()=>{
                 alterKey(keySelect[i].text, multisynth);
-                keyDD.innerHTML = "Key: " + keySelect[i].text;
+                keyDD.textContent = "Key: " + keySelect[i].text;
+                console.log(keySelect[i].text);
+                console.log(keyDD.textContent);
             })
         }
         for (let i = 0; i < synthSelect.length; i++){
             synthSelect[i].addEventListener("click", ()=>{
                 alterSynth(synthSelect[i].classList[2], multisynth);
-                synthDD.innerHTML = "Synth: " + synthSelect[i].text;
+                synthDD.textContent = "Synth: " + synthSelect[i].text;
             })
         }
+        synth.style.display = "block";
+        console.log("block");
     }
-    else{
-        synth2.style.display = "block";
-        let s = document.getElementById("settings2");
+    // If connecting further Specdrums, clone synth node and append to wrap node
+    else {
+        let newGUI = synth.cloneNode(true);
+        console.log(spec.device.name);
+        let s = newGUI.getElementsByClassName("settings")[0];
         s.innerHTML = spec.device.name + ": Settings";
-        let keyDD = document.getElementById('dropdownKey2');
-        let keySelect = document.getElementsByClassName('dropdown-item-key2');
-        let synthDD = document.getElementById('dropdownSynth2');
-        let synthSelect = document.getElementsByClassName('dropdown-item-synth2');
+        let keyDD = newGUI.getElementsByClassName('ddKey')[0];
+        let keySelect = newGUI.getElementsByClassName('dropdown-item-key');
+        let synthDD = newGUI.getElementsByClassName('ddSynth')[0];
+        let synthSelect = newGUI.getElementsByClassName('dropdown-item-synth');
+        keyDD.textContent = "Key: C";
+        synthDD.textContent = "Synth: Default";
         for (let i = 0; i < keySelect.length; i++){
             keySelect[i].addEventListener("click", ()=>{
                 alterKey(keySelect[i].text, multisynth);
-                keyDD.innerHTML = "Key: " + keySelect[i].text;
+                keyDD.textContent = "Key: " + keySelect[i].text;
             })
         }
         for (let i = 0; i < synthSelect.length; i++){
             synthSelect[i].addEventListener("click", ()=>{
                 alterSynth(synthSelect[i].classList[2], multisynth);
-                synthDD.innerHTML = "Synth: " + synthSelect[i].text;
+                synthDD.textContent = "Synth: " + synthSelect[i].text;
             })
         }
+        wrap.appendChild(newGUI);
     }
-
-    /* Key-Controlling Dropdown Menu */
-    
-
-    /* Synth-Controlling Dropdown Menu */
     
 }
 

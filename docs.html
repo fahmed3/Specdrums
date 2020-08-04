@@ -1,128 +1,154 @@
 <!doctype html>
 
 <html lang="en">
-<head>
-  <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
 
-  <title>Specdrums Docs</title>
-  <meta name="description" content="The HTML5 Herald">
-  <meta name="author" content="SitePoint">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <style>
-    .code {
-	font-family:Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New;
-    }
-    hr {
-	padding-bottom: 1em;
-    }
-  </style>
-  
-</head>
-<body>
-  <div style="padding:1em 5em">
-    <h1> Specdrum </h1>
-    <p> Class to handle connecting Specdrums to a Chrome browser and utilizing them. <br>      
-      View a <a href="https://fahmed3.github.io/Specdrums"> demonstration </a>  of using the Specdrum class.
-    </p>
-
-    <hr id="methods">
-    <h2> Methods </h2>
-    <ul>
-      <li> <a href="#constructor"> Constructor </a> </li>
-      <li> <a href="#addEventListener"> addEventListener </a> </li>
-      <li> <a href="#change"> change </a> </li>
-      <li> <a href="#connect"> connect </a> </li>
-      <li> <a href="#removeEventListener"> removeEventListener </a> </li>
-    </ul>
-
+    <title>Specdrums Docs</title>
+    <meta name="description" content="Specdrums Docs">
+    <meta name="author" content="SitePoint">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+      .code {
+        font-family:Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New;
+      }
+      hr {
+        padding-bottom: 1em;
+      }
+    </style>
     
-    <hr id="constructor">
-    <h3> Constructor </h3> <br>
-    <p class="code">
-      Specdrum(device, characteristics) </p>
-    <h5> Description </h5>
-    <p>
-      Specdrum class constructor to create a new Specdrum instance by passing in the device information and its characteristics.
-    </p>
-    <h5>Parameters</h5>
-    <ul>
-      <li> device {object} - information on the device from the device</li>
-      <li> characteristics {object} - array of length 5 or 8, representing note or chord</li>
-    </ul> 
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="https://fahmed3.github.io/Specdrums/">Specdrums</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="https://fahmed3.github.io/Specdrums/">Demo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://fahmed3.github.io/Specdrums/docs">Documentation<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/fahmed3/fahmed3.github.io/tree/master/Specdrums">Github</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div style="padding:1em 5em">
+        <h1> Specdrum </h1>
+        <p> Class to handle connecting Specdrums to a Chrome browser and utilizing them. <br>      
+          View a <a href="https://fahmed3.github.io/Specdrums"> demonstration </a>  of using the Specdrum class.
+        </p>
 
-    <hr id="addEventListener">
-    <h3> addEventListener </h3> <br>
-    <p class="code">
-      addEventListener(eventType, func, ...args)
-    </p>
-    <h5> Description </h5>
-    <p>
-      Function to allow the user to create event listeners for certain events, for the specdrum events include: 'connect', 'disconnected', 'tap', and 'release'.
-    </p>
-    <h5>Parameters</h5>
-    <ul>
-      <li> eventType {string} - One of the accepted events </li>
-      <li> func {function} - Function to be called </li>
-      <li> args {} </li>
-    </ul> 
+        <hr id="methods">
+        <h2> Methods </h2>
+        <ul>
+          <li> <a href="#constructor"> Constructor </a> </li>
+          <li> <a href="#addEventListener"> addEventListener </a> </li>
+          <li> <a href="#change"> change </a> </li>
+          <li> <a href="#connect"> connect </a> </li>
+          <li> <a href="#removeEventListener"> removeEventListener </a> </li>
+        </ul>
 
-    
-    <hr id="change">
-    <h3> change </h3> <br>    
-    <p class="code">
-      change()
-    </p>
-    <h5> Description </h5>
-    <p>
-      Function dealing with information received from the specdrum. It parses 
-      the array to see if it was a note or a chord, and to see if the specdrum 
-      was tapped or released, and then passes the information to event listeners.
-    </p>
-    
-    <hr id="connect">
-    <h3> connect </h3> <br>
-    <p class="code">
-      connect()
-    </p>
+        
+        <hr id="constructor">
+        <h3> Constructor </h3> <br>
+        <p class="code">
+          Specdrum(device, characteristics) </p>
+        <h5> Description </h5>
+        <p>
+          Specdrum class constructor to create a new Specdrum instance by passing in the device information and its characteristics.
+        </p>
+        <h5>Parameters</h5>
+        <ul>
+          <li> device {object} - information on the device from the device</li>
+          <li> characteristics {object} - array of length 5 or 8, representing note or chord</li>
+        </ul> 
 
-    <h5> Description </h5>
-    A static method to connect a Specdrum to the browser using the <a href="https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web">Chrome Bluetooth API </a>. <br>
-    It returns a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a> for the developer to be able to continue to use in their code with a success and failure callback. On a successful connection, the user receives the information of the connected Specdrum. </p>
-    <p>The following example uses the connect() method and to receive a Specdrum object.     </p>
-    <pre style="background-color:#E8E8E8" >
-      <code>
-	Specdrum.connect()
-	    .then(success, failure)
-	    .catch(error => { console.log(error); });
+        <hr id="addEventListener">
+        <h3> addEventListener </h3> <br>
+        <p class="code">
+          addEventListener(eventType, func, ...args)
+        </p>
+        <h5> Description </h5>
+        <p>
+          Function to allow the user to create event listeners for certain events, for the specdrum events include: 'connect', 'disconnected', 'tap', and 'release'.
+        </p>
+        <h5>Parameters</h5>
+        <ul>
+          <li> eventType {string} - One of the accepted events </li>
+          <li> func {function} - Function to be called </li>
+          <li> args {} </li>
+        </ul> 
 
-	function success(spec){
- 	    console.log("Connected New Specdrum: ", spec.device.name);
-	    console.log("Success!");
-	}
+        
+        <hr id="change">
+        <h3> change </h3> <br>    
+        <p class="code">
+          change()
+        </p>
+        <h5> Description </h5>
+        <p>
+          Function dealing with information received from the specdrum. It parses 
+          the array to see if it was a note or a chord, and to see if the specdrum 
+          was tapped or released, and then passes the information to event listeners.
+        </p>
+        
+        <hr id="connect">
+        <h3> connect </h3> <br>
+        <p class="code">
+          connect()
+        </p>
 
-	function failure() {
-	    console.log("Failed to connect");
-	}	
-      </code>
-    </pre>
-    
+        <h5> Description </h5>
+        A static method to connect a Specdrum to the browser using the <a href="https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web">Chrome Bluetooth API </a>. <br>
+        It returns a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a> for the developer to be able to continue to use in their code with a success and failure callback. On a successful connection, the user receives the information of the connected Specdrum. </p>
+        <p>The following example uses the connect() method and to receive a Specdrum object.     </p>
+        <pre style="background-color:#E8E8E8" >
+          <code>
+      Specdrum.connect()
+          .then(success, failure)
+          .catch(error => { console.log(error); });
 
-    <hr id="removeEventListener">
-    <h3> removeEventListener </h3> <br>    
-    <p class="code">
-      removeEventListener(eventType, func)
-    </p>
-    <h5> Description </h5>
-    <p>
-      Function to allow the user to remove event listeners they added.
-    </p>
-    <h5>Parameters</h5>
-    <ul>
-      <li> eventType {string} - The event the listener is being removed from </li>
-      <li> func {function} - Function to stop callback to </li>
-      <li> args {} </li>
-    </ul>     
-    
-  </div>
-</body>
-</html>
+      function success(spec){
+          console.log("Connected New Specdrum: ", spec.device.name);
+          console.log("Success!");
+      }
+
+      function failure() {
+          console.log("Failed to connect");
+      }	
+          </code>
+        </pre>
+        
+
+        <hr id="removeEventListener">
+        <h3> removeEventListener </h3> <br>    
+        <p class="code">
+          removeEventListener(eventType, func)
+        </p>
+        <h5> Description </h5>
+        <p>
+          Function to allow the user to remove event listeners they added.
+        </p>
+        <h5>Parameters</h5>
+        <ul>
+          <li> eventType {string} - The event the listener is being removed from </li>
+          <li> func {function} - Function to stop callback to </li>
+          <li> args {} </li>
+        </ul>     
+        
+      </div>
+    </div>
+  </body>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+  </html>

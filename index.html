@@ -4,8 +4,8 @@
 
     <meta charset="utf-8">
 
-    <title>Demo</title>
-    <meta name="description" content="The HTML5 Herald">
+    <title>Specdrums Demo</title>
+    <meta name="description" content="Specdrums Demo">
     <meta name="author" content="SitePoint">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <style>
@@ -39,82 +39,42 @@
       </div>
     </nav>
     <div class="container-fluid">
-      <div style="padding:1em 5em">
+      <div id="wrap" style="padding:1em 5em">
         <h1> Demo </h1>
         <p> Click the button below to connect your Specdrums, one at a time.</p> <br>
     
         <hr>
-        <!-- bluetooth indicator icon (bootstrap examples), make it a large button -->
         <!-- navbar with github, fabiha's page. footer ath the botto with descritpion about project (copy from poster) -->
-        <button id="btn" class="btn btn-primary btn-large"> Connect Specdrum<i class="material-icons">bluetooth</i></button></button>
-        <div id="synth1" style="display:none;">
-          <h5 id="settings1"> </h5>
+        <button id="btn" class="btn btn-primary btn-large"> Connect Specdrum </button>
+        <div id="synth" style="display:none;">
+          <h5 class="settings"> </h5>
           <div class="container">
             <div class="row">
               <div class="col-sm">
                 <div class="dropdown">
-                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownKey1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a class="btn btn-secondary dropdown-toggle ddKey" href="#" role="button" id="dropdownKey" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Key: C
                   </a>
-                  <div class="dropdown-menu" aria-labelledby="dropdownKey1">
-                    <a class="dropdown-item dropdown-item-key1" href="#">A</a>
-                    <a class="dropdown-item dropdown-item-key1" href="#">B</a>
-                    <a class="dropdown-item dropdown-item-key1" href="#">C</a>
-                    <a class="dropdown-item dropdown-item-key1" href="#">D</a>
-                    <a class="dropdown-item dropdown-item-key1" href="#">E</a>
-                    <a class="dropdown-item dropdown-item-key1" href="#">F</a>
-                    <a class="dropdown-item dropdown-item-key1" href="#">G</a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownKey">
+                    <a class="dropdown-item dropdown-item-key" href="#">A</a>
+                    <a class="dropdown-item dropdown-item-key" href="#">B</a>
+                    <a class="dropdown-item dropdown-item-key" href="#">C</a>
+                    <a class="dropdown-item dropdown-item-key" href="#">D</a>
+                    <a class="dropdown-item dropdown-item-key" href="#">E</a>
+                    <a class="dropdown-item dropdown-item-key" href="#">F</a>
+                    <a class="dropdown-item dropdown-item-key" href="#">G</a>
                   </div>
                 </div>
               </div>
               <div class="col-sm">
                 <div class="dropdown">
-                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownSynth1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a class="btn btn-secondary dropdown-toggle ddSynth" href="#" role="button" id="dropdownSynth" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Synth: Default
                   </a>
-                  <div class="dropdown-menu" aria-labelledby="dropdownSynth1">
-                    <a class="dropdown-item dropdown-item-synth1 default" href="#">Default</a>
-                    <a class="dropdown-item dropdown-item-synth1 am" href="#">AM</a>
-                    <a class="dropdown-item dropdown-item-synth1 fm" href="#">FM</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm">
-                 
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="synth2" style="display:none;">
-          <p id="specdrumID2"> </p>
-          <h5 id="settings2"> </h5>
-          <div class="container">
-            <div class="row">
-              <div class="col-sm">
-                <div class="dropdown">
-                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownKey2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Key: C
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="dropdownKey2">
-                    <a class="dropdown-item dropdown-item-key2" href="#">A</a>
-                    <a class="dropdown-item dropdown-item-key2" href="#">B</a>
-                    <a class="dropdown-item dropdown-item-key2" href="#">C</a>
-                    <a class="dropdown-item dropdown-item-key2" href="#">D</a>
-                    <a class="dropdown-item dropdown-item-key2" href="#">E</a>
-                    <a class="dropdown-item dropdown-item-key2" href="#">F</a>
-                    <a class="dropdown-item dropdown-item-key2" href="#">G</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm">
-                <div class="dropdown">
-                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownSynth2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Synth: Default
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="dropdownSynth2">
-                    <a class="dropdown-item dropdown-item-synth2 default" href="#">Default</a>
-                    <a class="dropdown-item dropdown-item-synth2 am" href="#">AM</a>
-                    <a class="dropdown-item dropdown-item-synth2 fm" href="#">FM</a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownSynth">
+                    <a class="dropdown-item dropdown-item-synth default" href="#">Default</a>
+                    <a class="dropdown-item dropdown-item-synth am" href="#">AM</a>
+                    <a class="dropdown-item dropdown-item-synth fm" href="#">FM</a>
                   </div>
                 </div>
               </div>
@@ -127,7 +87,6 @@
       </div>
     </div>
   </body>
-  
   <script src="https://unpkg.com/@webcomponents/webcomponentsjs@^2/webcomponents-bundle.js"></script>
   <script src="https://unpkg.com/tone"></script>
   <script src="https://unpkg.com/@tonejs/ui"></script>
@@ -136,7 +95,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  <!--<script src="specdrum.js">  </script>-->
-  <!--<script src="specdrum.js">  </script>-->
+  
 </html>
 
