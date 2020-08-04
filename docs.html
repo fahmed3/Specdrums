@@ -21,10 +21,23 @@
 <body>
   <div style="padding:1em 5em">
     <h1> Specdrum </h1>
-    <p> Class to handle connecting Specdrums to a Chrome browser and utilizing them.</p> <br>
+    <p> Class to handle connecting Specdrums to a Chrome browser and utilizing them. <br>      
+      View a <a href="https://fahmed3.github.io/Specdrums"> demonstration </a>  of using the Specdrum class.
+    </p>
 
+    <hr id="methods">
+    <h2> Methods </h2>
+    <ul>
+      <li> <a href="#constructor"> Constructor </a> </li>
+      <li> <a href="#addEventListener"> addEventListener </a> </li>
+      <li> <a href="#change"> change </a> </li>
+      <li> <a href="#connect"> connect </a> </li>
+      <li> <a href="#removeEventListener"> removeEventListener </a> </li>
+    </ul>
 
-    <hr>
+    
+    <hr id="constructor">
+    <h3> Constructor </h3> <br>
     <p class="code">
       Specdrum(device, characteristics) </p>
     <h5> Description </h5>
@@ -37,41 +50,8 @@
       <li> characteristics {object} - array of length 5 or 8, representing note or chord</li>
     </ul> 
 
-
-
-    <hr>
-    <p class="code">
-      connect()
-    </p>
-
-    <h5> Description </h5>
-          A static method to connect a Specdrum to the browser using the <a href="https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web">Chrome Bluetooth API </a>. <br>
-    It returns a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a> for the developer to be able to continue to use in their code. </p>
-
-    <p> The following example uses the connect() method and instantiates a new Specdrum. 
-    </p>
-    <pre style="background-color:#E8E8E8" >
-      <code>
-	Specdrum.connect().then(spec => {
-	    console.log("Connected New Specdrum: ", spec.device.name);
- 	    let spec = new Specdrum(spec.device, spec.characteristics);
-	}).catch(error => { console.log(error); });
-      </code>
-    </pre>
-
-    <hr>
-    <p class="code">
-      change()
-    </p>
-    <h5> Description </h5>
-    <p>
-      Function dealing with information received from the specdrum. It parses 
-      the array to see if it was a note or a chord, and to see if the specdrum 
-      was tapped or released, and then passes the information to event listeners.
-    </p>
-
-
-    <hr>
+    <hr id="addEventListener">
+    <h3> addEventListener </h3> <br>
     <p class="code">
       addEventListener(eventType, func, ...args)
     </p>
@@ -86,8 +66,49 @@
       <li> args {} </li>
     </ul> 
 
+    
+    <hr id="change">
+    <h3> change </h3> <br>    
+    <p class="code">
+      change()
+    </p>
+    <h5> Description </h5>
+    <p>
+      Function dealing with information received from the specdrum. It parses 
+      the array to see if it was a note or a chord, and to see if the specdrum 
+      was tapped or released, and then passes the information to event listeners.
+    </p>
+    
+    <hr id="connect">
+    <h3> connect </h3> <br>
+    <p class="code">
+      connect()
+    </p>
 
-    <hr>
+    <h5> Description </h5>
+    A static method to connect a Specdrum to the browser using the <a href="https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web">Chrome Bluetooth API </a>. <br>
+    It returns a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a> for the developer to be able to continue to use in their code with a success and failure callback. On a successful connection, the user receives the information of the connected Specdrum. </p>
+    <p>The following example uses the connect() method and to receive a Specdrum object.     </p>
+    <pre style="background-color:#E8E8E8" >
+      <code>
+	Specdrum.connect()
+	    .then(success, failure)
+	    .catch(error => { console.log(error); });
+
+	function success(spec){
+ 	    console.log("Connected New Specdrum: ", spec.device.name);
+	    console.log("Success!");
+	}
+
+	function failure() {
+	    console.log("Failed to connect");
+	}	
+      </code>
+    </pre>
+    
+
+    <hr id="removeEventListener">
+    <h3> removeEventListener </h3> <br>    
     <p class="code">
       removeEventListener(eventType, func)
     </p>
